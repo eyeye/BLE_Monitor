@@ -7,8 +7,14 @@
 //
 
 #import "PeripheralListController.h"
+#import <CoreBluetooth/CoreBluetooth.h>
+#import "Discovery.h"
 
-@interface PeripheralListController ()
+@interface PeripheralListController () <DiscoveryDelegate>
+
+//@property(nonatomic, strong) NSMutableArray *peripheralList;
+//@property(nonatomic, strong) NSMutableArray *rssiList;
+//@property(nonatomic, strong) CBCentralManager *centralManager;
 
 @end
 
@@ -32,7 +38,79 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+//    self.peripheralList = [NSMutableArray array];
+//    self.rssiList = [NSMutableArray array];
+    
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@"Refreshing..."];
+    [self.refreshControl addTarget:self action:@selector(scanPeripherals) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl endRefreshing];
+    
+//    if( self.centralManager == nil)
+//    {
+//        self.centralManager = [CBCentralManager alloc];
+//    }
+//
+//    self.centralManager = [self.centralManager initWithDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)];
+
 }
+
+
+- (void) viewWillAppear:(BOOL)animated
+{
+//    if( self.centralManager == nil)
+//    {
+//        self.centralManager = [CBCentralManager alloc];
+//    }
+//    
+//    self.centralManager = [self.centralManager initWithDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)];
+    
+    [[Discovery sharedInstance] setDelegate:self];
+}
+
+
+- (void) startScan
+{
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        if(self.centralManager.state == CBCentralManagerStatePoweredOn)
+//        {
+//            [self.centralManager scanForPeripheralsWithServices:nil
+//                                                       options:@{ CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
+//            NSLog(@"Scanning started");
+//        }
+//    });
+    
+    [[Discovery sharedInstance] startScan];
+}
+
+-(void) stopScan
+{
+    [self.refreshControl endRefreshing];
+    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        if(self.centralManager.state == CBCentralManagerStatePoweredOn)
+//        {
+////            [self.centralManager stopScan];
+//            NSLog(@"Scanning stoped");
+//        }
+//    });
+    
+    [[Discovery sharedInstance] stopScan];
+}
+
+
+- (void) scanPeripherals
+{
+    [self startScan];
+    
+    double delayInSeconds = 10.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self stopScan];
+    });
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -44,24 +122,35 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+//#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+//#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    
+//    return [self.peripheralList count];
+    return [[[Discovery sharedInstance] discoveredPeripherals] count];
+//    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"PeripheralCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+//    CBPeripheral* peripheral = [self.peripheralList objectAtIndex:indexPath.row];
+//    NSNumber *rssi = self.rssiList[indexPath.row];
+    
+    CBPeripheral* peripheral = [[[Discovery sharedInstance] discoveredPeripherals] objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = peripheral.name;
+//    cell.detailTextLabel.text = [ [NSString alloc]initWithFormat:@"%@ dBm",  rssi];
     
     return cell;
 }
@@ -111,11 +200,109 @@
 {
     // Navigation logic may go here. Create and push another view controller.
     /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"Nib name" bundle:nil];
      // ...
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    
+    CBPeripheral *selectPeripheral;
+    
+    selectPeripheral = [[[Discovery sharedInstance] discoveredPeripherals] objectAtIndex:indexPath.row];
+    
+    if( !selectPeripheral.isConnected )
+    {
+         [[Discovery sharedInstance] connectPeripheral:selectPeripheral];
+    }
+       
+
 }
 
+
+//- (void)centralManagerDidUpdateState:(CBCentralManager *)central
+//{
+//    NSLog(@"State updated: %d", central.state);
+//    
+//    if (central.state != CBCentralManagerStatePoweredOn)
+//    {
+//        return ;
+//    }
+//    else
+//    {
+//        ;
+//    }
+//}
+
+
+//- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
+//{
+//    NSLog(@"Discovered a peripheral: %@,  RSSI: %@", peripheral.name, RSSI);
+//    
+//    
+//    if( ![self.peripheralList containsObject:peripheral] )
+//    {
+//        [self.peripheralList addObject:peripheral];
+//        [self.rssiList addObject:RSSI];
+//        
+//        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//            [self.tableView reloadData];
+//        });
+//    }
+//    else
+//    {
+//        
+//    }
+//
+//    self.rssiList[ [self.peripheralList indexOfObject:peripheral] ] = RSSI;
+//
+//    return;
+//}
+//
+
+- (void) discoveryDidRefresh
+{
+    [self.tableView reloadData];
+}
+
+
+-(void) discoveryDidPowerOff
+{
+    
+}
+
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSLog(@"prepareForSegue %@", segue.identifier);
+    
+    if( [segue.identifier isEqual: @"segueToServices"])
+    {
+        if (self.refreshControl.isRefreshing) {
+            [self stopScan];
+        }
+        
+//        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+//        CBPeripheral *selectPeripheral = self.peripheralList[indexPath.row];
+//        CBCentralManager *centralManager = self.centralManager;
+        
+//        CBPeripheral *selectPeripheral;
+//        
+//        selectPeripheral = [[[Discovery sharedInstance] discoveredPeripherals] objectAtIndex:indexPath.row];
+//        
+//        [[Discovery sharedInstance] connectPeripheral:selectPeripheral];
+        
+//        id sevicesView = segue.destinationViewController;
+        
+//        [sevicesView setValue:[[[Discovery sharedInstance] discoveredPeripherals] objectAtIndex:indexPath.row]
+//                       forKey:@"peripheral"];
+        
+//        [sevicesView setValue:centralManager forKey:@"centralManager"];
+    }
+}
+
+
 @end
+
+
+

@@ -17,7 +17,13 @@
 		173CAAF816EE01F2000E6E47 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 173CAAF716EE01F2000E6E47 /* Default@2x.png */; };
 		173CAAFA16EE01F2000E6E47 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 173CAAF916EE01F2000E6E47 /* Default-568h@2x.png */; };
 		173CAAFD16EE01F2000E6E47 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 173CAAFB16EE01F2000E6E47 /* MainStoryboard.storyboard */; };
-		173CAB0016EE01F2000E6E47 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 173CAAFF16EE01F2000E6E47 /* ViewController.m */; };
+		1740036916EF5F7600513C6B /* PeripheralListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1740036816EF5F7600513C6B /* PeripheralListController.m */; };
+		1740036B16EF63B500513C6B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1740036A16EF63B500513C6B /* CoreBluetooth.framework */; };
+		1740036E16EF74C800513C6B /* PeripheralCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1740036D16EF74C800513C6B /* PeripheralCellController.m */; };
+		178762FC175E1CFD00D127E6 /* BLE_Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = 178762FB175E1CFD00D127E6 /* BLE_Manager.m */; };
+		17876300175E29AF00D127E6 /* Discovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 178762FF175E29AF00D127E6 /* Discovery.m */; };
+		17A9BDBC16F0AB1D00F76F5E /* ServiceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BDBB16F0AB1D00F76F5E /* ServiceListController.m */; };
+		17BB488D1760BE0300D618A0 /* ServiceCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17BB488C1760BE0300D618A0 /* ServiceCellController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,8 +41,19 @@
 		173CAAF716EE01F2000E6E47 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		173CAAF916EE01F2000E6E47 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		173CAAFC16EE01F2000E6E47 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		173CAAFE16EE01F2000E6E47 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		173CAAFF16EE01F2000E6E47 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1740036716EF5F7600513C6B /* PeripheralListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeripheralListController.h; sourceTree = "<group>"; };
+		1740036816EF5F7600513C6B /* PeripheralListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeripheralListController.m; sourceTree = "<group>"; };
+		1740036A16EF63B500513C6B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		1740036C16EF74C800513C6B /* PeripheralCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeripheralCellController.h; sourceTree = "<group>"; };
+		1740036D16EF74C800513C6B /* PeripheralCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeripheralCellController.m; sourceTree = "<group>"; };
+		178762FA175E1CFD00D127E6 /* BLE_Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE_Manager.h; sourceTree = "<group>"; };
+		178762FB175E1CFD00D127E6 /* BLE_Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLE_Manager.m; sourceTree = "<group>"; };
+		178762FE175E29AF00D127E6 /* Discovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Discovery.h; sourceTree = "<group>"; };
+		178762FF175E29AF00D127E6 /* Discovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Discovery.m; sourceTree = "<group>"; };
+		17A9BDBA16F0AB1D00F76F5E /* ServiceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceListController.h; sourceTree = "<group>"; };
+		17A9BDBB16F0AB1D00F76F5E /* ServiceListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceListController.m; sourceTree = "<group>"; };
+		17BB488B1760BE0300D618A0 /* ServiceCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCellController.h; sourceTree = "<group>"; };
+		17BB488C1760BE0300D618A0 /* ServiceCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCellController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1740036B16EF63B500513C6B /* CoreBluetooth.framework in Frameworks */,
 				173CAAE416EE01F1000E6E47 /* UIKit.framework in Frameworks */,
 				173CAAE616EE01F1000E6E47 /* Foundation.framework in Frameworks */,
 				173CAAE816EE01F1000E6E47 /* CoreGraphics.framework in Frameworks */,
@@ -73,6 +91,7 @@
 		173CAAE216EE01F1000E6E47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1740036A16EF63B500513C6B /* CoreBluetooth.framework */,
 				173CAAE316EE01F1000E6E47 /* UIKit.framework */,
 				173CAAE516EE01F1000E6E47 /* Foundation.framework */,
 				173CAAE716EE01F1000E6E47 /* CoreGraphics.framework */,
@@ -83,12 +102,21 @@
 		173CAAE916EE01F1000E6E47 /* BLE Monitor */ = {
 			isa = PBXGroup;
 			children = (
+				178762FD175E222F00D127E6 /* BLE */,
 				173CAAF216EE01F2000E6E47 /* AppDelegate.h */,
 				173CAAF316EE01F2000E6E47 /* AppDelegate.m */,
 				173CAAFB16EE01F2000E6E47 /* MainStoryboard.storyboard */,
-				173CAAFE16EE01F2000E6E47 /* ViewController.h */,
-				173CAAFF16EE01F2000E6E47 /* ViewController.m */,
+				1740036716EF5F7600513C6B /* PeripheralListController.h */,
+				1740036816EF5F7600513C6B /* PeripheralListController.m */,
+				1740036C16EF74C800513C6B /* PeripheralCellController.h */,
+				1740036D16EF74C800513C6B /* PeripheralCellController.m */,
+				17A9BDBA16F0AB1D00F76F5E /* ServiceListController.h */,
+				17A9BDBB16F0AB1D00F76F5E /* ServiceListController.m */,
 				173CAAEA16EE01F1000E6E47 /* Supporting Files */,
+				178762FA175E1CFD00D127E6 /* BLE_Manager.h */,
+				178762FB175E1CFD00D127E6 /* BLE_Manager.m */,
+				17BB488B1760BE0300D618A0 /* ServiceCellController.h */,
+				17BB488C1760BE0300D618A0 /* ServiceCellController.m */,
 			);
 			path = "BLE Monitor";
 			sourceTree = "<group>";
@@ -107,6 +135,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		178762FD175E222F00D127E6 /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				178762FE175E29AF00D127E6 /* Discovery.h */,
+				178762FF175E29AF00D127E6 /* Discovery.m */,
+			);
+			name = BLE;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -117,6 +154,7 @@
 				173CAADC16EE01F1000E6E47 /* Sources */,
 				173CAADD16EE01F1000E6E47 /* Frameworks */,
 				173CAADE16EE01F1000E6E47 /* Resources */,
+				173CAB0616EE0227000E6E47 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -168,6 +206,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		173CAB0616EE0227000E6E47 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		173CAADC16EE01F1000E6E47 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -175,7 +229,12 @@
 			files = (
 				173CAAF016EE01F2000E6E47 /* main.m in Sources */,
 				173CAAF416EE01F2000E6E47 /* AppDelegate.m in Sources */,
-				173CAB0016EE01F2000E6E47 /* ViewController.m in Sources */,
+				1740036916EF5F7600513C6B /* PeripheralListController.m in Sources */,
+				1740036E16EF74C800513C6B /* PeripheralCellController.m in Sources */,
+				17A9BDBC16F0AB1D00F76F5E /* ServiceListController.m in Sources */,
+				178762FC175E1CFD00D127E6 /* BLE_Manager.m in Sources */,
+				17876300175E29AF00D127E6 /* Discovery.m in Sources */,
+				17BB488D1760BE0300D618A0 /* ServiceCellController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +272,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -244,7 +304,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -298,6 +359,7 @@
 				173CAB0516EE01F2000E6E47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

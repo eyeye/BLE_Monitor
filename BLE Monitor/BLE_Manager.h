@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
 @interface BLE_Manager : NSObject
+
+@property(nonatomic, strong) CBCentralManager *centralManager;
+
 
 @end

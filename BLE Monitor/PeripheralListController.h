@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PeripheralListController : UITableViewController
+@interface PeripheralListController : UITableViewController;
 
 @end
