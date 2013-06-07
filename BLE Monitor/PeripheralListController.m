@@ -66,7 +66,10 @@
 //    
 //    self.centralManager = [self.centralManager initWithDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)];
     
+    NSLog(@"view will appear");
     [[Discovery sharedInstance] setDelegate:self];
+//    NSLog(@"%@", [Discovery sharedInstance].connectedPeripherals);
+    [self.tableView reloadData];
 }
 
 
@@ -125,7 +128,7 @@
 //#warning Potentially incomplete method implementation.
     // Return the number of sections.
 
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -134,7 +137,22 @@
     // Return the number of rows in the section.
     
 //    return [self.peripheralList count];
-    return [[[Discovery sharedInstance] discoveredPeripherals] count];
+    if( section == 0)
+    {
+        NSUInteger count = [[[Discovery sharedInstance] discoveredPeripherals] count];
+        NSLog(@"numberOfRowsInSection %ld: %ld", (long)section, (long)count);
+        return count;
+    }
+    else if( section == 1 )
+    {
+        NSUInteger count = [[[Discovery sharedInstance] connectedPeripherals] count];
+        NSLog(@"numberOfRowsInSection %ld: %ld", (long)section, (long)count);
+        return count;
+    }
+    else
+    {
+        return 0;
+    }
 //    return 1;
 }
 
@@ -144,13 +162,18 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-//    CBPeripheral* peripheral = [self.peripheralList objectAtIndex:indexPath.row];
-//    NSNumber *rssi = self.rssiList[indexPath.row];
-    
-    CBPeripheral* peripheral = [[[Discovery sharedInstance] discoveredPeripherals] objectAtIndex:indexPath.row];
+    CBPeripheral* peripheral;
+    if( indexPath.section == 0)
+    {
+        peripheral = [[[Discovery sharedInstance] discoveredPeripherals] objectAtIndex:indexPath.row];
+    }
+    else if(indexPath.section == 1)
+    {
+        peripheral = [[[Discovery sharedInstance] connectedPeripherals] objectAtIndex:indexPath.row];
+
+    }
     
     cell.textLabel.text = peripheral.name;
-//    cell.detailTextLabel.text = [ [NSString alloc]initWithFormat:@"%@ dBm",  rssi];
     
     return cell;
 }
@@ -208,7 +231,12 @@
     
     CBPeripheral *selectPeripheral;
     
-    selectPeripheral = [[[Discovery sharedInstance] discoveredPeripherals] objectAtIndex:indexPath.row];
+    if(indexPath.section == 0)
+        selectPeripheral = [[[Discovery sharedInstance] discoveredPeripherals] objectAtIndex:indexPath.row];
+    else if(indexPath.section == 1)
+        selectPeripheral = [[[Discovery sharedInstance] connectedPeripherals] objectAtIndex:indexPath.row];
+    else
+        return;
     
     if( !selectPeripheral.isConnected )
     {

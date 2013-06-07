@@ -90,7 +90,7 @@
 -(void) stopScan
 {
     NSLog(@"停止扫描设备");
-//    [centralManager stopScan];
+    [centralManager stopScan];
 }
 
 
@@ -148,14 +148,14 @@
 
 -(void) centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    CBPeripheral *connectedPeripheral = nil;
+    CBPeripheral *disconnectedPeripheral = nil;
     
-    for (connectedPeripheral in _connectedPeripherals)
+    for (disconnectedPeripheral in _connectedPeripherals)
     {
-        if (connectedPeripheral == peripheral)
+        if (disconnectedPeripheral == peripheral)
         {
-            [_connectedPeripherals removeObject:connectedPeripheral];
-            NSLog(@"设备断开连接: %@", connectedPeripheral);
+            [_connectedPeripherals removeObject:disconnectedPeripheral];
+            NSLog(@"设备断开连接: %@", disconnectedPeripheral);
         }
     }
     
@@ -243,6 +243,10 @@
 {
     NSLog(@"发现服务：%@", peripheral.services);
     [_delegate discoveryDidRefresh];
+    
+    for (CBService *service in peripheral.services) {
+        [peripheral discoverCharacteristics:nil forService:service];
+    }
 }
 
 
